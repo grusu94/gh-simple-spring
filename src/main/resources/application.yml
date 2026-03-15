@@ -9,6 +9,15 @@ spring:
 server:
   port: 9000
 
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka-server:9095/eureka}
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
 simple:
   greeting:
     message: ${greeting.message}

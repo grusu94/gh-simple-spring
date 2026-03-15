@@ -5,7 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(properties = {
         "spring.cloud.config.enabled=false",
-        "spring.profiles.active=test"
+        "spring.profiles.active=test",
+        "eureka.client.enabled=false"
 })
 class GhSimpleSpringApplicationTests {
 

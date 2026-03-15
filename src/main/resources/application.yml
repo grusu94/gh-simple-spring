@@ -2,9 +2,10 @@ spring:
   application:
     name: gh-simple-spring
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: ${SPRING_PROFILES_ACTIVE:default}
   config:
-    import: optional:configserver:http://gh-config-server:9090
+    import: ${SPRING_CONFIG_IMPORT:default}
+
 server:
   port: 9000
 

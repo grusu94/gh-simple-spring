@@ -1,0 +1,39 @@
+name: Preview build
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull request number to build'
+        required: true
+        type: string
+      environment:
+        description: 'Target environment'
+        type: choice
+        options:
+          - DEV
+          - INT
+          - PREPROD
+        required: true
+
+jobs:
+  prepare:
+    uses: homelab994/gh-newops/.github/workflows/prepare-build.yml@develop
+    secrets: inherit
+
+  build-image:
+    needs: prepare
+    uses: homelab994/gh-newops/.github/workflows/build-push-docker.yml@develop
+    with:
+      artifact-name: 'gh-simple-spring'
+      release-version: ${{ needs.prepare.outputs.release-version }}
+    secrets: inherit
+
+  deploy-artifact:
+    needs: [ prepare, build-image ]
+    uses: homelab994/gh-newops/.github/workflows/deploy-k8s-preview.yml@develop
+    with:
+      artifact-name: 'gh-simple-spring'
+      release-version: ${{ needs.prepare.outputs.release-version }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit

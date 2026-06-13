@@ -24,7 +24,7 @@ jobs:
     secrets: inherit
 
   build-deploy-artifact:
-    needs: [ prepare, build-image ]
+    needs: [ prepare ]
     uses: homelab994/gh-newops/.github/workflows/deploy-k8s-preview.yml@develop
     with:
       pr_number: ${{ inputs.pr_number }}

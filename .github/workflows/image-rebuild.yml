@@ -3,10 +3,6 @@ name: Image rebuild
 on:
   workflow_dispatch:
     inputs:
-      artifact-name:
-        description: 'Artifact name'
-        type: string
-        required: true
       release-version:
         description: 'Release version to rebuild (e.g. 26.6.11)'
         type: string

@@ -8,5 +8,5 @@ jobs:
   increment-version:
     uses: homelab994/gh-newops/.github/workflows/monthly-increment-version.yml@develop
     with:
-      service-name: 'gh-simple-spring'
+      service-name: ${{ github.event.repository.name }}
     secrets: inherit

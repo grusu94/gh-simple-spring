@@ -16,6 +16,6 @@ jobs:
   undeploy-preview:
     uses: homelab994/gh-newops/.github/workflows/remove-k8s-preview.yml@develop
     with:
-      artifact-name: 'gh-simple-spring'
+      artifact-name: ${{ github.event.repository.name }}
       environment: ${{ inputs.environment }}
     secrets: inherit

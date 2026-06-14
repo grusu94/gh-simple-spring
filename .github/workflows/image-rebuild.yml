@@ -1,0 +1,27 @@
+name: Image rebuild
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact-name:
+        description: 'Artifact name'
+        type: string
+        required: true
+      release-version:
+        description: 'Release version to rebuild (e.g. 26.6.11)'
+        type: string
+        required: true
+      commits-back:
+        description: 'Number of commits to go back for version (default: 1)'
+        type: string
+        default: "1"
+        required: false
+
+jobs:
+  rebuild:
+    uses: homelab994/gh-newops/.github/workflows/rebuild-image.yml@develop
+    with:
+      artifact-name: 'gh-simple-spring'
+      release-version: ${{ inputs.release-version }}
+      commits-back: ${{ inputs.commits-back }}
+    secrets: inherit

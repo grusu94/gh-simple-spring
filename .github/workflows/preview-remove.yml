@@ -1,4 +1,4 @@
-name: Preview build
+name: Preview remove
 
 on:
   workflow_dispatch:

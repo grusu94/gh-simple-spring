@@ -17,7 +17,7 @@ on:
         required: true
 
 jobs:
-  build-image:
+  build-image-preview:
     uses: homelab994/gh-newops/.github/workflows/build-push-docker-preview.yml@develop
     with:
       pr_number: ${{ inputs.pr_number }}
@@ -25,10 +25,10 @@ jobs:
     secrets: inherit
 
   deploy-preview:
-    needs: build-image
+    needs: build-image-preview
     uses: homelab994/gh-newops/.github/workflows/deploy-k8s-preview.yml@develop
     with:
       artifact-name: 'gh-simple-spring'
-      release-version: ${{ needs.build-image.outputs.release-version }}
+      release-version: ${{ needs.build-image.outputs.preview-version }}
       environment: ${{ inputs.environment }}
     secrets: inherit

@@ -1,0 +1,21 @@
+name: Preview build
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        type: choice
+        options:
+          - DEV
+          - INT
+          - PREPROD
+        required: true
+
+jobs:
+  undeploy-preview:
+    uses: homelab994/gh-newops/.github/workflows/remove-k8s-preview.yml@develop
+    with:
+      artifact-name: 'gh-simple-spring'
+      environment: ${{ inputs.environment }}
+    secrets: inherit

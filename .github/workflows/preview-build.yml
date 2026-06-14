@@ -25,10 +25,9 @@ jobs:
     secrets: inherit
 
   deploy-preview:
-    needs: [ prepare, build-image ]
+    needs: build-image
     uses: homelab994/gh-newops/.github/workflows/deploy-k8s-preview.yml@develop
     with:
       artifact-name: 'gh-simple-spring'
-      release-version: ${{ needs.prepare.outputs.release-version }}
       environment: ${{ inputs.environment }}
     secrets: inherit
